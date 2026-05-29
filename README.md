@@ -10,7 +10,7 @@ desenvolvimento da pesquisa.
 
 ## Autoria
 
-**Autor:** Prof. Dr. Tibérius de Oliveira e Bonates, Universidade Federal do
+**Autor:** Prof. Dr. Tibérius de Oliveira e Bonates, da Universidade Federal do
 Ceará.
 
 **Coautor:** João Paulo Venancio Silva
@@ -133,5 +133,48 @@ Execute o script:
 python notalonepuzzle.py
 ```
 
-As instâncias de exemplo estão definidas diretamente no bloco principal do
-arquivo `notalonepuzzle.py`.
+## Uso das Instâncias
+
+As instâncias obtidas a partir do site de referência estão organizadas em:
+
+```text
+instances/site/6x6/
+instances/site/8x8/
+```
+
+Cada arquivo representa uma única instância do puzzle. O padrão adotado é:
+
+- `A` para uma célula preenchida com `A`;
+- `Z` para uma célula preenchida com `Z`;
+- `.` para uma célula vazia.
+
+Exemplo de instância `6 x 6`:
+
+```text
+......
+......
+...A.A
+......
+...A..
+....A.
+```
+
+O código converte automaticamente os pontos (`.`) para espaços em branco antes
+de resolver o puzzle, preservando o formato interno usado pelos algoritmos.
+
+Para escolher qual instância será resolvida, altere manualmente a variável
+`instancia` no bloco principal do arquivo `notalonepuzzle.py`:
+
+```python
+instancia = 'instances/site/6x6/p01.txt'
+```
+
+Por exemplo, para resolver a vigésima instância `8 x 8`, use:
+
+```python
+instancia = 'instances/site/8x8/p20.txt'
+```
+
+Ao executar o programa, as duas abordagens implementadas são aplicadas sobre a
+instância selecionada, e os conjuntos de soluções encontrados são comparados ao
+final.

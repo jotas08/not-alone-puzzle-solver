@@ -1,6 +1,7 @@
 from ortools.linear_solver import pywraplp
 import itertools as it
 import copy
+from pathlib import Path
 
 
 def solve_NotAlone(grid, solsProibidas):
@@ -66,6 +67,28 @@ def solve_NotAlone(grid, solsProibidas):
 
 def filtrar(dominio, posicao, valor):
     return [d for d in dominio if d[posicao] == valor]
+
+
+def ler_instancia(caminho):
+    linhas = Path(caminho).read_text().splitlines()
+    n = len(linhas)
+
+    if n == 0:
+        raise ValueError(f'Instância vazia: {caminho}')
+    if n % 2 != 0:
+        raise ValueError(f'Instância deve ter dimensão par: {caminho}')
+
+    caracteres_validos = {'A', 'Z', '.'}
+    tabuleiro = []
+    for i, linha in enumerate(linhas, start=1):
+        if len(linha) != n:
+            raise ValueError(f'Linha {i} de {caminho} tem tamanho {len(linha)}, esperado {n}')
+        invalidos = set(linha) - caracteres_validos
+        if invalidos:
+            raise ValueError(f'Linha {i} de {caminho} possui caracteres inválidos: {sorted(invalidos)}')
+        tabuleiro.append(linha.replace('.', ' '))
+
+    return tabuleiro
     
 def resolver(tabuleiro):
     
@@ -156,57 +179,9 @@ def resolver(tabuleiro):
 
 
 if __name__ == '__main__':
-
-    tabuleiro1 = [
-        '      ',
-        '      ',
-        '   A A',
-        '      ',
-        '   A  ',
-        '    A '
-    ]
-
-    tabuleiro10 = [
-        '      ',
-        '      ',
-        'A  A  ',
-        '      ',
-        '  Z   ',
-        ' Z    '
-    ]
-    
-    tabuleiro30 = [
-        ' A A  ',
-        '  Z   ',
-        '      ',
-        '      ',
-        '     A',
-        '  Z  A'
-    ]
-
-    tabuleiro8_1 = [
-        '        ',
-        'A AAZ   ',
-        'ZZA     ',
-        '  AAAAZZ',
-        '     ZZ ',
-        ' AZ  Z  ',
-        'A Z ZA  ',
-        '  Z  AA '
-    ]
-
-    tabuleiro8_1_vazio = [
-        '        ',
-        'A AAZ   ',
-        'ZZA     ',
-        '        ',
-        '        ',
-        '        ',
-        '        ',
-        '        '
-    ]
-
-    tabuleiro = tabuleiro10
+    instancia = 'instances/site/6x6/p01.txt'
+    tabuleiro = ler_instancia(instancia)
+    print(f'Instância: {instancia}')
     print(tabuleiro)
 
     print('\nENCONTRANDO SOLUCOES VIA PROPAGACAO:')
