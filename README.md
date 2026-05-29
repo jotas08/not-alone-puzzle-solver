@@ -1,6 +1,6 @@
 # Not Alone Puzzle
 
-Este repositório contém uma implementação acadêmica para resolução do problema
+Este repositório contém uma implementação para resolução do problema
 **Not Alone Puzzle**, desenvolvida no contexto de uma monografia na Universidade
 Federal do Ceará.
 
